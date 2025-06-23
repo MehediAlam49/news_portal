@@ -78,17 +78,21 @@
           </thead>
           <tbody>
             <!-- Sample Row (Loop through dynamic data here) -->
+            
+            {% for news in news %}
             <tr>
-              <td><img src="thumbnail1.jpg" alt="Thumbnail" class="thumbnail-img"></td>
-              <td>Breaking News Title</td>
-              <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-              <td>2025-06-23</td>
-              <td>
-                <a href="/edit-news/1" class="btn btn-sm btn-edit me-1">Edit</a>
-                <a href="/edit-news/1" class="btn btn-sm btn-info me-1">View</a>
-                <a href="" class="btn btn-sm btn-delete">Delete</a>
-              </td>
-            </tr>
+                <td><img src="{{news.thumbnail.url}}" alt="Thumbnail" class="thumbnail-img"></td>
+                <td>{{news.title}}</td>
+                <td>{{news.content}}</td>
+                <td>{{news.published_date}}</td>
+                <td>
+                  <a href="{% url 'editNews' news.id %}" class="btn btn-sm btn-edit me-1">Edit</a>
+                  <a href="{% url 'viewNews' news.id %}" class="btn btn-sm btn-info me-1">View</a>
+                  <a href="{% url 'deleteNews' news.id %}" class="btn btn-sm btn-delete">Delete</a>
+                </td>
+              </tr>
+            {% endfor %}
+                
             <!-- Repeat rows as needed -->
           </tbody>
         </table>
